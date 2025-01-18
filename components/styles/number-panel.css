@@ -1,0 +1,17 @@
+.number-panel-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+    margin-top: 5vw;
+}
+
+.number-panel-col-disable {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.number-panel-row {
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+}

@@ -1,0 +1,15 @@
+.sudoku-cell {
+    display: flex;
+    height: 9vw;
+    width: 9vw;
+    align-items: center;
+    justify-content: center;
+    font-size: 7vw;
+    border: 1px solid white;
+    font-family: monospace;
+    color: white;
+}
+
+.sudoku-cell-active {
+    background-color: orange;
+}
