@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "sudoku_android",
+    "name": "androidSudoku",
     "slug": "sudoku_android",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.sudoku_android"
     },
     "web": {
       "bundler": "metro",
