@@ -21,6 +21,7 @@ const style = StyleSheet.create({
 })
 
 interface NumberPanelProps {
+    fixedCells: number[],
     activeCol: number,
     activeRow: number,
     setCellValue: any
@@ -31,10 +32,15 @@ export default class NumberPanel extends Component<NumberPanelProps, {}> {
         super(props)
     }
 
+    isActiveCellFixed = () => {
+        return this.props.fixedCells.findIndex((obj) =>
+            obj === 10 * this.props.activeCol + this.props.activeRow) > -1
+    }
+
     render() {
         return <View style={[
             style.numberPanelCol,
-            this.props.activeCol===-1 ? style.numberPanelDisable : {}
+            this.props.activeCol===-1 || this.isActiveCellFixed() ? style.numberPanelDisable : {}
         ]}>
             {Array.from(Array(2)).map((_, row_index) => (
                 <View style={style.numberPanelRow} key={row_index}>

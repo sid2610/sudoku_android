@@ -24,6 +24,7 @@ interface SudokuSubGridProps {
     fixedCells: number[],
     activeCol: number,
     activeRow: number,
+    activeValue: number,
     setActiveCell: any,
     setCellValue: any,
     sub_col: number,
@@ -41,6 +42,7 @@ export default class SudokuSubGrid extends Component<SudokuSubGridProps, {}> {
                                 fixedCells={this.props.fixedCells}
                                 activeCol={this.props.activeCol}
                                 activeRow={this.props.activeRow}
+                                activeValue={this.props.activeValue}
                                 setActiveCell={this.props.setActiveCell}
                                 cellVal={this.props.grid[3 * this.props.sub_col + col_index][3 * this.props.sub_row + row_index]}
                                 setCellVal={this.props.setCellValue}

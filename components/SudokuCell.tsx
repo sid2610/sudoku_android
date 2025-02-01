@@ -26,6 +26,7 @@ interface SudokuCellProps {
     fixedCells: number[];
     activeCol: number,
     activeRow: number,
+    activeValue: number,
     setActiveCell: any,
     cellVal: number,
     setCellVal: any,
@@ -42,6 +43,10 @@ export default class SudokuCell extends Component<SudokuCellProps, {}> {
         return this.props.activeCol === this.props.col && this.props.activeRow === this.props.row
     }
 
+    isActiveValue = () => {
+        return this.props.activeValue > 0 && this.props.activeValue === this.props.cellVal
+    }
+
     isCellFixed = () => {
         return this.props.fixedCells.findIndex((obj) =>
             obj === 10 * this.props.col + this.props.row) > -1
@@ -50,14 +55,13 @@ export default class SudokuCell extends Component<SudokuCellProps, {}> {
     render() {
         return <TouchableOpacity
             onPress={
-                this.isCellFixed() ? () => {} :
                 () => this.props.setActiveCell(this.props.col, this.props.row)
             }
         >
             <View
                 style={[ style.sudokuCell,
-                    this.isCellFixed() ? {pointerEvents: 'none'} : {},
-                    this.isCellActive() ? {backgroundColor: 'orange', shadowOpacity: 0} : {}
+                    this.isCellActive() ? {backgroundColor: 'teal', shadowOpacity: 0} : {},
+                    !this.isCellActive() && this.isActiveValue() ? {backgroundColor: '#606060'} : {}
                 ]}
             >
                 <Text style={[
