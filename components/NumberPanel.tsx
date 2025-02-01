@@ -1,7 +1,24 @@
 import { Component } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
 import NumberButton from "./NumberButton";
 
-import "@/components/styles/number-panel.css"
+const style = StyleSheet.create({
+    numberPanelCol: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: Dimensions.get('window').width / 30,
+        marginTop: Dimensions.get('window').width / 20
+    },
+    numberPanelRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: Dimensions.get('window').width / 30
+    },
+    numberPanelDisable: {
+        pointerEvents: 'none',
+        opacity: 0.7
+    }
+})
 
 interface NumberPanelProps {
     activeCol: number,
@@ -15,9 +32,12 @@ export default class NumberPanel extends Component<NumberPanelProps, {}> {
     }
 
     render() {
-        return <div className={this.props.activeCol < 0 ? 'number-panel-col number-panel-col-disable' : 'number-panel-col'}>
+        return <View style={[
+            style.numberPanelCol,
+            this.props.activeCol===-1 ? style.numberPanelDisable : {}
+        ]}>
             {Array.from(Array(2)).map((_, row_index) => (
-                <div className="number-panel-row" key={row_index}>
+                <View style={style.numberPanelRow} key={row_index}>
                     {Array.from(Array(5)).map((_, col_index) => (
                         <NumberButton
                             activeCol={this.props.activeCol}
@@ -27,8 +47,8 @@ export default class NumberPanel extends Component<NumberPanelProps, {}> {
                             key={col_index}
                         ></NumberButton>
                     ))}
-                </div>
+                </View>
             ))}
-        </div>
+        </View>
     }
 }

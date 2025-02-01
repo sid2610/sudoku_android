@@ -6,9 +6,5 @@ export default function RootLayout() {
       headerShown: true,
       headerTitle: 'androidSudoku'
     }}
-  >
-    <Stack.Screen name="android" options={{
-      title: 'android'
-    }}/>
-  </Stack>;
+  />
 }

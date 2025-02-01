@@ -1,6 +1,21 @@
 import { Component } from "react";
+import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 
-import "@/components/styles/number-button.css"
+const style = StyleSheet.create({
+    numberButton: {
+        display: 'flex',
+        width: Dimensions.get('window').width / 10,
+        height: Dimensions.get('window').width / 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+    numberButtonText: {
+        color: 'black',
+        fontFamily: 'monospace',
+        fontSize: Dimensions.get('window').width / 15
+    }
+})
 
 interface NumberButtonProps {
     activeCol: number,
@@ -15,14 +30,19 @@ export default class NumberButton extends Component<NumberButtonProps, {}> {
     }
 
     render() {
-        return <div 
-            className="number-button" 
-            onClick={() => this.props.setCellValue(this.props.activeCol, this.props.activeRow, this.props.buttonVal)}
-            style={{
-                backgroundColor: this.props.buttonVal > 0 ? 'white' : 'orange'
-            }}
+        return <TouchableOpacity
+            onPress={() => this.props.setCellValue(this.props.activeCol, this.props.activeRow, this.props.buttonVal)}
         >
-            {this.props.buttonVal > 0 ? this.props.buttonVal : 'X'}
-        </div>
+            <View
+                style={[style.numberButton, {
+                    backgroundColor: this.props.buttonVal > 0 ? 'white' : 'orange'
+                }]}
+            >
+                <Text style={[
+                    style.numberButtonText,
+                    this.props.buttonVal === 0 ? {color: 'white'} : {}
+                ]}>{this.props.buttonVal > 0 ? this.props.buttonVal : 'X'}</Text>
+            </View>
+        </TouchableOpacity>
     }
 }

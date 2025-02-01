@@ -1,5 +1,26 @@
 import { Component } from "react";
-import '@/components/styles/sudoku-cell.css'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+const style = StyleSheet.create({
+    sudokuCell: {
+        display: 'flex',
+        height: Dimensions.get('window').width / 10,
+        width: Dimensions.get('window').width / 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderStyle: 'solid'
+    },
+    sudokuFixedCell: {
+        pointerEvents: 'none',
+        color: 'orange'
+    },
+    sudokuCellText: {
+        fontSize: Dimensions.get('window').width / 15,
+        fontFamily: 'monospace'
+    }
+})
 
 interface SudokuCellProps {
     fixedCells: number[];
@@ -22,22 +43,28 @@ export default class SudokuCell extends Component<SudokuCellProps, {}> {
     }
 
     isCellFixed = () => {
-        return this.props.fixedCells.findIndex((obj) => 
+        return this.props.fixedCells.findIndex((obj) =>
             obj === 10 * this.props.col + this.props.row) > -1
     }
 
     render() {
-        return <div
-            className={this.isCellActive() ? 'sudoku-cell sudoku-cell-active' : 'sudoku-cell'}
-            onClick={() => this.props.setActiveCell(this.props.col, this.props.row)}
-            style={
-                this.isCellFixed() ? {
-                    pointerEvents: 'none',
-                    color: 'orange'
-                } : {}
+        return <TouchableOpacity
+            onPress={
+                this.isCellFixed() ? () => {} :
+                () => this.props.setActiveCell(this.props.col, this.props.row)
             }
         >
-            {this.props.cellVal > 0 ? this.props.cellVal : ''}
-        </div>
+            <View
+                style={[ style.sudokuCell,
+                    this.isCellFixed() ? {pointerEvents: 'none'} : {},
+                    this.isCellActive() ? {backgroundColor: 'orange', shadowOpacity: 0} : {}
+                ]}
+            >
+                <Text style={[
+                    style.sudokuCellText,
+                    this.isCellFixed() ? {color: 'orange'} : {color: 'white'}
+                ]}>{this.props.cellVal > 0 ? this.props.cellVal : ''}</Text>
+            </View>
+        </TouchableOpacity>
     }
 }

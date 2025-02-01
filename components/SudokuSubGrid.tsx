@@ -1,7 +1,23 @@
 import { Component } from "react"
-import "@/components/styles/sudoku-sub-grid.css"
+import { StyleSheet, View } from "react-native"
 
 import SudokuCell from "./SudokuCell"
+
+const style = StyleSheet.create({
+    sudokuSubGrid: {
+        borderColor: 'white',
+        borderWidth: 1,
+        borderStyle: 'solid'
+    },
+    sudokuSubGridCol: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    sudokuSubGridRow: {
+        display: 'flex',
+        flexDirection: 'row'
+    }
+})
 
 interface SudokuSubGridProps {
     grid: number[][],
@@ -16,10 +32,10 @@ interface SudokuSubGridProps {
 
 export default class SudokuSubGrid extends Component<SudokuSubGridProps, {}> {
     render() {
-        return <div className="sudoku-sub-grid">
-            <div className="sudoku-grid-col">
+        return <View style={style.sudokuSubGrid}>
+            <View style={style.sudokuSubGridCol}>
                 {Array.from(Array(3)).map((_, row_index) => (
-                    <div className="sudoku-grid-row" key={row_index}>
+                    <View style={style.sudokuSubGridRow} key={row_index}>
                         {Array.from(Array(3)).map((_, col_index) => (
                             <SudokuCell
                                 fixedCells={this.props.fixedCells}
@@ -33,9 +49,9 @@ export default class SudokuSubGrid extends Component<SudokuSubGridProps, {}> {
                                 key={col_index}
                             ></SudokuCell>
                         ))}
-                    </div>
+                    </View>
                 ))}
-            </div>
-        </div>
+            </View>
+        </View>
     }
 }

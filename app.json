@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "sudoku_android",
+    "name": "androidSudoku",
     "slug": "sudoku_android",
     "version": "1.0.0",
     "orientation": "portrait",

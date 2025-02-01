@@ -1,9 +1,0 @@
-.sudoku-grid-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.sudoku-grid-col {
-    display: flex;
-    flex-direction: column;
-}
