@@ -8,8 +8,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'teal',
-        marginTop: Dimensions.get('window').width / 20,
-        // padding: Dimensions.get('window').width / 20
+        marginTop: Dimensions.get('window').width / 40
     },
     resetButtonText: {
         color: 'white',
