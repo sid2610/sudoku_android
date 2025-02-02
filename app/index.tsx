@@ -4,12 +4,14 @@ import SudokuGrid from "@/components/SudokuGrid";
 import NumberPanel from "@/components/NumberPanel";
 import ResetButton from "@/components/ResetButton";
 import GridGenerator from "@/scripts/GenerateGrid";
+import DifficultySlider from "@/components/DifficultySlider";
 
 interface IndexState {
   activeCol: number,
   activeRow: number,
   activeValue: number,
-  grid: number[][]
+  grid: number[][],
+  visibleCells: number
 }
 
 export default class Index extends Component<{}, IndexState> {
@@ -19,7 +21,8 @@ export default class Index extends Component<{}, IndexState> {
   constructor(props: any) {
     super(props)
 
-    this.fixedCells = new Array(30)
+    var numVisibleCells = 35
+    this.fixedCells = new Array(numVisibleCells)
     var generateNewGrid: boolean = true
     var initGrid: number[][] = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,7 +56,7 @@ export default class Index extends Component<{}, IndexState> {
 
     var row: number, col: number
 
-    for (let j = 0; j < 30; j++) {
+    for (let j = 0; j < numVisibleCells; j++) {
       row = Math.floor(Math.random() * 9)
       col = Math.floor(Math.random() * 9)
 
@@ -71,12 +74,19 @@ export default class Index extends Component<{}, IndexState> {
       activeCol: -1,
       activeRow: -1,
       activeValue: 0,
-      grid: initGrid
+      grid: initGrid,
+      visibleCells: numVisibleCells
     }
+  }
+
+  adjustDifficulty = (numVisible: number) => {
+    this.setState({
+      visibleCells: numVisible
+    })
   }
   
   resetGrid = () => {
-    this.fixedCells = new Array(30)
+    this.fixedCells = new Array(this.state.visibleCells)
     var generateNewGrid: boolean = true
     var initGrid: number[][] = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -110,7 +120,7 @@ export default class Index extends Component<{}, IndexState> {
 
     var row: number, col: number
 
-    for (let j = 0; j < 30; j++) {
+    for (let j = 0; j < this.state.visibleCells; j++) {
       row = Math.floor(Math.random() * 9)
       col = Math.floor(Math.random() * 9)
 
@@ -175,6 +185,10 @@ export default class Index extends Component<{}, IndexState> {
           activeRow={this.state.activeRow}
           setCellValue={this.setCellValue}
         ></NumberPanel>
+        <DifficultySlider
+          visibleCells={this.state.visibleCells}
+          adjustDifficulty={this.adjustDifficulty}
+        ></DifficultySlider>
         <ResetButton
           resetGrid={this.resetGrid}
         ></ResetButton>
